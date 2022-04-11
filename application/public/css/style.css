@@ -61,6 +61,17 @@ header {
     background-size: 50%, 50%;
     height: 175px;
     z-index: 100;
+    border: 5px solid white;
+}
+
+footer {
+    background-color: rgb(192,217,247);
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    height: 30px;
+    width: 100%;
+    border-top: 5px solid white;
 }
 
 button {
