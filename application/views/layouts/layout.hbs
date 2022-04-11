@@ -12,8 +12,13 @@
     <!--<script defer src="../js/registration.js"></script>-->
 </head>
   <body>
-  {{> banner}}
-    {{{body}}}
+  <div id="home-container">
+      {{> banner}}
+      {{> nav}}
+      {{{body}}}
+      {{> footer}}
+  </div>
+
   </body>
 </html>
 <!--<link rel="icon" href="/public/favicon.ico" sizes="70x70" type="image/ico">-->
