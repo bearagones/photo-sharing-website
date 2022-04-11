@@ -22,4 +22,5 @@ Please follow the instructions below and fill in the information requested when 
 1. In the terminal, type: "npm install"
 
 ## Run Instructions
-1. In the terminal type: "npm start"
+1. In the terminal, type: "cd ./application"
+2. In the terminal, type: "npm start"
