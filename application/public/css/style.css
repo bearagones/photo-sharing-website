@@ -31,6 +31,7 @@ body {
 
 fieldset {
     height: auto;
+    margin: 10px;
 }
 
 header {
@@ -40,16 +41,6 @@ header {
     height: 175px;
     z-index: 100;
     border: 5px solid white;
-}
-
-footer {
-    background-color: rgb(192,217,247);
-    position: fixed;
-    bottom: 0;
-    text-align: center;
-    height: 30px;
-    width: 100%;
-    border-top: 5px solid white;
 }
 
 button {
@@ -91,22 +82,13 @@ span {
 .login {
     width: 500px;
     font-size: 20pt;
-    height: auto;
+    height: fit-content;
     margin: auto;
     background: white;
     box-shadow: inset 0 0 0 10px #A7C7E7;
 }
 
-.register {
-    width: 800px;
-    font-size: 15pt;
-    height: 500px;
-    margin: auto;
-    background: white;
-    box-shadow: inset 0 0 0 10px #A7C7E7;
-}
-
-.post {
+.post, .register {
     width: 800px;
     font-size: 15pt;
     height: auto;
@@ -153,11 +135,20 @@ img {
     width: 50%;
 }
 
-#button, #item-counter {
+#button {
     display: flex;
     text-align: center;
     justify-content: center;
     margin: auto;
+}
+
+#login-button {
+    width: 150px;
+}
+
+#logout-button {
+    width: 150px;
+    padding: revert;
 }
 
 #forgot{
@@ -171,30 +162,52 @@ img {
     text-align: center;
 }
 
-#content {
+#grid-container {
     display: grid;
     position: relative;
     grid-template-rows: repeat(5, 1fr);
     grid-template-columns: repeat(5, 1fr);
     grid-auto-rows: 1fr;
     grid-auto-columns: 1fr;
+    height: 5fr;
     gap: .25em;
     margin: 4px;
-    width: 100%;
-    z-index: 10;
 }
 
-#home-container {
-    position: relative;
+#container {
     height: fit-content;
 }
 
+#banner {
+    display: flex;
+    justify-content: center;
+    margin: 4px;
+}
+
+#nav {
+    display: flex;
+    height: available;
+    margin: 4px;
+}
+
+#footer {
+    background-color: rgb(192,217,247);
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    height: 30px;
+    width: 100%;
+    border-top: 5px solid white;
+}
+
 #search-text {
-    width: 69.5%;
+    width: 70%;
     background-image: url(../resources/magnifying-glass.png);
     background-repeat: no-repeat;
     background-position: right center;
     border: 2px solid white;
+    height: 50px;
+    margin: revert;
 }
 
 #comment-text {
@@ -207,4 +220,22 @@ img {
     margin: auto;
     width: 595px;
     border: 2px solid white;
+}
+
+#flash-message {
+    position: relative;
+    top: 30%;
+    display: flex;
+    justify-content: center;
+    /*left: 50%;*/
+    /*transform: translate(-50%, 0);*/
+    margin: 4px;
+}
+
+#flash-message div {
+    text-align: center;
+    padding: 15px;
+    width: fit-content;
+    border: 2px solid white;
+    background-color: aliceblue;
 }
