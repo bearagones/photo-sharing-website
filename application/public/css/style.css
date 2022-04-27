@@ -223,12 +223,10 @@ img {
 }
 
 #flash-message {
-    position: relative;
+    position: absolute;
     top: 30%;
-    display: flex;
-    justify-content: center;
-    /*left: 50%;*/
-    /*transform: translate(-50%, 0);*/
+    left: 50%;
+    transform: translate(-50%, 0);
     margin: 4px;
 }
 
@@ -237,5 +235,12 @@ img {
     padding: 15px;
     width: fit-content;
     border: 2px solid white;
-    background-color: aliceblue;
+}
+
+.alert-danger {
+    background-color: #ffc3c3;
+}
+
+.alert-success {
+    background-color: #deffe8;
 }
