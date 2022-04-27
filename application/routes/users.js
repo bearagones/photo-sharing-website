@@ -4,14 +4,13 @@ var db = require("../config/database.js");
 const UserError = require("../helpers/error/UserError");
 const {errorPrint, successPrint} = require("../helpers/debug/debugprinters");
 var bcrypt = require('bcrypt');
+const {registerValidation} = require("../middleware/validation.js");
 
-router.post('/register', (req, res, next) => {
+router.post('/register', registerValidation, (req, res, next) => {
     let username = req.body.username;
     let email = req.body.email;
     let password = req.body.password;
     let confirmpass = req.body.password;
-
-    //do server side validation here
 
     db.execute("SELECT * FROM users WHERE username=?", [username])
         .then(([results, fields]) => {
@@ -23,7 +22,11 @@ router.post('/register', (req, res, next) => {
         })
         .then(([results, fields]) => {
             if (results && results.length === 0) {
-                return bcrypt.hash(password, 15);
+                if (password === confirmpass) {
+                    return bcrypt.hash(password, 15);
+                } else {
+                    req.flash('error', 'Passwords do not match!');
+                }
             } else {
                 throw new UserError("Registration Failed: Email already exists", "/registration", 200);
             }
