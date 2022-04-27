@@ -2,24 +2,40 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/style.css">
     <link rel="icon" type="image/ico" sizes="70x70" href="/public/favicon.ico">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Birthstone&family=Montserrat:wght@100&display=swap');
-    </style>
+    <style> @import url('https://fonts.googleapis.com/css2?family=Birthstone&family=Montserrat:wght@100&display=swap');</style>
     <title>AmiguruBea</title>
     <script defer src="/public/js/registration.js"></script>
+    <script defer src="/public/js/frontend.js"></script>
 </head>
   <body>
   <div id="home-container">
       {{> banner}}
       {{> nav}}
+      {{#if (emptyObject messages)}}
+          {{> flashmessage}}
+      {{/if}}
       {{{body}}}
       {{> footer}}
   </div>
 
+  {{#if logged}}
+      <script>
+          let ele = document.getElementById("logout-button");
+          if (ele) {
+              ele.onclick = (event) => {
+                  fetch('/users/logout', {
+                      method: "POST"
+                  })
+                  .then((data) => {
+                      location.replace('/');
+                  })
+              }
+          }
+      </script>
+  {{/if}}
   </body>
 </html>
