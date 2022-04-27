@@ -78,7 +78,7 @@ router.post('/login', (req, res, next) => {
             req.session.userId = userId;
             res.locals.logged = true;
             req.flash('success', 'You have been successfully logged in!')
-            res.render('index');
+            res.redirect('/');
         } else {
             throw new UserError("Password is incorrect!", "/login", 200);
         }
