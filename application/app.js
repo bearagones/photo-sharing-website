@@ -7,11 +7,32 @@ const logger = require("morgan");
 const handlebars = require("express-handlebars");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-const sessions = require('express-session');
-const mysqlSession = require('express-mysql-session')(sessions);
+var errorPrint = require("./helpers/debug/debugprinters.js").errorPrint;
+var requestPrint = require("./helpers/debug/debugprinters.js").requestPrint;
+var sessions = require('express-session');
+var mysqlSession = require('express-mysql-session')(sessions);
 const flash = require('express-flash');
 
 const app = express();
+
+var mysqlSessionStore = new mysqlSession({
+    // using default settings
+}, require('./config/database'));
+
+app.use(sessions({
+    key: "csid",
+    secret: "shhh",
+    store: mysqlSessionStore,
+    resave: false,
+    saveUninitialized: false
+}))
+
+app.use((req, res, next) => {
+    if (req.session.username) {
+        res.locals.logged = true;
+    }
+    next();
+})
 
 app.engine(
   "hbs",
@@ -28,24 +49,11 @@ app.engine(
   })
 );
 
-const mysqlSessionStore = new mysqlSession({
-    // using default settings
-}, require('./config/database'));
-
-app.use(sessions({
-    key: "csid",
-    secret: "shhh",
-    store: mysqlSessionStore,
-    resave: false,
-    saveUninitialized: false
-}))
-
 app.use(flash());
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
-
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -58,13 +66,6 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter); // route middleware from ./routes/index.js
 app.use("/users", usersRouter); // route middleware from ./routes/users.js
 
-app.use((req, res, next) => {
-    if (req.session.username) {
-        res.locals.logged = true;
-    }
-    next();
-})
-
 /**
  * Catch all route, if we get to here then the 
  * resource requested could not be found.
@@ -72,7 +73,6 @@ app.use((req, res, next) => {
 app.use((req,res,next) => {
   next(createError(404, `The route ${req.method} : ${req.url} does not exist.`));
 })
-  
 
 /**
  * Error Handler, used to render the error html file
@@ -81,10 +81,15 @@ app.use((req,res,next) => {
 app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = err;
-  console.log(err);
+  errorPrint(err);
   // render the error page
   res.status(err.status || 500);
   res.render("error");
 });
+
+app.use((req, res, next) => {
+    requestPrint(`Method ${req.method}, Route: ${req.url}`);
+    next();
+})
 
 module.exports = app;
