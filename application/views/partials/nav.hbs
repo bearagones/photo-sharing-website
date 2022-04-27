@@ -1,6 +1,11 @@
-<nav id="nav-bar">
+<nav id="nav">
     <button onclick="location.href='/'" type="button">Home</button>
     <input id="search-text" name="search-text" type="text" placeholder="Search here!">
     <button onclick="location.href='/postimage'" type="button">Post</button>
-    <button onclick="location.href='/login'" type="button">Log In</button>
+
+    {{#if logged}}
+        <button id="logout-button" type="button">Log Out</button>
+    {{else}}
+        <button id="login-button" onclick="location.href='/login'" type="button">Log In</button>
+    {{/if}}
 </nav>
