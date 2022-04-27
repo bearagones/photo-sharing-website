@@ -1,27 +1,27 @@
-<form id="form" method="post" onsubmit="validateForm(event)">
+<form id="form" method="post" onsubmit="validateForm(event)" action="/users/register" enctype="application/x-www-form-urlencoded">
     <div class="register">
         <br/>
         <h1>Sign Up</h1>
         <div id="field">
             <fieldset>
                 <label id="email">Email:</label>
-                <label> <input type="email" placeholder="Enter Email" name="email"></label>
+                <label> <input type="email" placeholder="Enter Email" required name="email"></label>
 
                 <br/>
 
                 <label id="username">Username:</label>
-                <label> <input type="text" placeholder="Enter Username" id="user"></label>
+                <label> <input type="text" placeholder="Enter Username" id="user" required name="username"></label>
             </fieldset>
         </div>
         <div id="field">
             <fieldset>
                 <label id="password">Password:</label>
-                <label> <input type="password" placeholder="Enter Password" id="pass"></label>
+                <label> <input type="password" placeholder="Enter Password" id="pass" required name="password"></label>
 
                 <br/>
 
                 <label id="confirmpassword">Confirm Password:</label>
-                <label> <input type="password" placeholder="Re-enter Password" id="confirmpass"></label>
+                <label> <input type="password" placeholder="Re-enter Password" id="confirmpass" required name="confirmpass"></label>
             </fieldset>
         </div>
         <div id="attest">
