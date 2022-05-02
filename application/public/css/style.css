@@ -1,7 +1,7 @@
 * {
     border: none;
     box-sizing: border-box;
-    cursor: url(../resources/bumblebea.png), default;
+    cursor: url(../images/bumblebea.png), default;
 }
 
 h1 {
@@ -20,7 +20,7 @@ h2 {
 }
 
 body {
-    background: url(../resources/blue-marble.jpeg);
+    background: url(../images/blue-marble.jpeg);
     background-size: cover;
     height: 100%;
     display: flex;
@@ -29,17 +29,11 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-fieldset {
-    height: auto;
-    margin: 10px;
-}
-
 header {
-    background: url(../resources/banner.png) no-repeat center;
+    background: url(../images/banner.png) no-repeat center;
     background-color: rgb(192,217,247);
     background-size: 50%, 50%;
     height: 175px;
-    z-index: 100;
     border: 5px solid white;
 }
 
@@ -67,16 +61,16 @@ input[type=text], input[type=password], input[type=email] {
     font-family: 'Montserrat', sans-serif;
     font-size: 12pt;
     white-space: nowrap;
-    overflow: hidden;
+    overflow: scroll;
     text-overflow: ellipsis;
-}
-
-a {
-    text-decoration: none;
 }
 
 span {
     padding-inline: 5px;
+}
+
+a {
+    text-decoration: none;
 }
 
 .login {
@@ -91,8 +85,8 @@ span {
 .post, .register {
     width: 800px;
     font-size: 15pt;
-    height: auto;
-    margin: auto;
+    height: fit-content;
+    margin: 10px auto;
     background: white;
     box-shadow: inset 0 0 0 10px #A7C7E7;
 }
@@ -151,6 +145,11 @@ img {
     padding: revert;
 }
 
+#post-details {
+    height: 45%;
+    font-size: 10px;
+}
+
 #forgot{
     font-size: 15pt;
     padding: 5px;
@@ -162,47 +161,66 @@ img {
     text-align: center;
 }
 
-#grid-container {
+#home-container {
+    width: 100%;
+    height: 95vh;
+    margin: auto;
+    overflow: auto;
+    align-items: center;
+    justify-content: center;
     display: grid;
-    position: relative;
-    grid-template-rows: repeat(5, 1fr);
-    grid-template-columns: repeat(5, 1fr);
-    grid-auto-rows: 1fr;
-    grid-auto-columns: 1fr;
-    height: 5fr;
-    gap: .25em;
-    margin: 4px;
+    grid-template-rows: 1fr .5fr 5fr 30px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    "banner"
+    "nav"
+    "content"
+    "footer";
 }
 
-#container {
+#grid-container {
+    display: grid;
+    text-align: center;
+    font-size: 10pt;
+    justify-content: center;
+    grid-area: content;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 1fr;
+    grid-auto-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    margin: 10px;
     height: fit-content;
 }
 
 #banner {
     display: flex;
     justify-content: center;
-    margin: 4px;
+    grid-area: banner;
 }
 
 #nav {
     display: flex;
     height: available;
+    grid-area: nav;
     margin: 4px;
 }
 
 #footer {
     background-color: rgb(192,217,247);
-    position: fixed;
-    bottom: 0;
-    text-align: center;
-    height: 30px;
+    display: flex;
+    justify-content: center;
     width: 100%;
+    height: 30px;
     border-top: 5px solid white;
+    grid-area: footer;
+    position: absolute;
+    bottom: 0;
 }
 
 #search-text {
     width: 70%;
-    background-image: url(../resources/magnifying-glass.png);
+    background-image: url(../images/magnifying-glass.png);
     background-repeat: no-repeat;
     background-position: right center;
     border: 2px solid white;
@@ -211,7 +229,7 @@ img {
 }
 
 #comment-text {
-    background-image: url(../resources/speech-bubble.png);
+    background-image: url(../images/speech-bubble.png);
     background-repeat: no-repeat;
     background-position: 560px;
     background-size: 4%;
