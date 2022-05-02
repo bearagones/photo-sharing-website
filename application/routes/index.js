@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var isLoggedIn = require('../middleware/routeprotectors.js').userIsLoggedIn;
+var getRecentPosts = require('../middleware/postsmiddleware.js').getRecentPosts;
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', getRecentPosts, function(req, res, next) {
   res.render('index', { title: 'CSC 317 App'});
 });
 
@@ -16,7 +17,6 @@ router.get('/registration', (req,res,next) => {
 })
 
 router.use('/postimage', isLoggedIn);
-
 router.get('/postimage', (req,res,next) => {
   res.render('postimage', {title: "Post an Image"});
 })
