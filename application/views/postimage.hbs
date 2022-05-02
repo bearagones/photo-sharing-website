@@ -1,29 +1,30 @@
-<form>
+<form id="post-image" method="POST" enctype="multipart/form-data">
     <div class="post">
         <fieldset>
             <h1>Image Information</h1>
             <label id="title">Title:</label>
-            <label> <input type="text" placeholder="Insert Title" name="title"></label>
+            <label> <input type="text" placeholder="Insert Title" required name="title"></label>
 
-            <br />
+            <br/>
 
             <label id="description">Description:</label>
             <label for="description-box"></label>
-            <textarea id="description-box" rows="3" placeholder="Type a Description"></textarea>
+            <textarea id="description-box" rows="3" placeholder="Type a Description" required
+                      name="description"></textarea>
 
-            <br />
+            <br/>
 
             <label id="image-post">Select Image: </label>
-            <label><input type="file" name="image-post"></label>
+            <label><input type="file" required name="selectImage"></label>
 
-            <br /><br />
+            <br/><br/>
 
             <div id="agree">
                 <label id="aup">I acknowledge that I have read and agreed with the <a href="">Acceptable Use Policy.</a></label>
-                <label><input type="checkbox" name="policy"></label>
+                <label><input type="checkbox" required name="policy"></label>
             </div>
 
-            <br />
+            <br/>
 
             <div id="button">
                 <button type="submit">Post Image</button>
@@ -32,3 +33,21 @@
         </fieldset>
     </div>
 </form>
+<script>
+    const _form = document.getElementById('image-post')
+    _form.onsubmit = function (event) {
+        event.preventDefault();
+        let _body = new FormData(_form);
+
+        axios('posts/createPost', {
+            data: _body,
+            method: "POST"
+        })
+        .then((data) => {
+            console.log(data.data);
+            alert(data.data.message);
+            location.replace(data.data.redirect);
+        })
+        .catch(err => console.log(err));
+    }
+</script>
