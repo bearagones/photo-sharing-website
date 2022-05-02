@@ -4,18 +4,20 @@ const favicon = require('serve-favicon');
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const handlebars = require("express-handlebars");
+const sessions = require('express-session');
+const mysqlSession = require('express-mysql-session')(sessions);
+const flash = require('express-flash');
+
+const handlebars = require('express-handlebars');
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-var errorPrint = require("./helpers/debug/debugprinters.js").errorPrint;
-var requestPrint = require("./helpers/debug/debugprinters.js").requestPrint;
-var sessions = require('express-session');
-var mysqlSession = require('express-mysql-session')(sessions);
-const flash = require('express-flash');
+const postsRouter = require("./routes/posts");
+const errorPrint = require("./helpers/debug/debugprinters.js").errorPrint;
+const requestPrint = require("./helpers/debug/debugprinters.js").requestPrint;
 
 const app = express();
 
-var mysqlSessionStore = new mysqlSession({
+const mysqlSessionStore = new mysqlSession({
     // using default settings
 }, require('./config/database'));
 
@@ -35,19 +37,17 @@ app.use((req, res, next) => {
 })
 
 app.engine(
-  "hbs",
-  handlebars({
+  "hbs", handlebars({
     layoutsDir: path.join(__dirname, "views/layouts"), //where to look for layouts
     partialsDir: path.join(__dirname, "views/partials"), // where to look for partials
     extname: ".hbs", //expected file extension for handlebars files
     defaultLayout: "layout", //default layout for app, general template for all pages in app
     helpers: {
         emptyObject: (obj) => {
-            return !(obj.constructor === Object && Object.keys(obj).length === 0)
+            return !(obj.constructor === Object && Object.keys(obj).length === 0);
         }
-    }, //adding new helpers to handlebars for extra functionality
-  })
-);
+    }//adding new helpers to handlebars for extra functionality
+}));
 
 app.use(flash());
 
@@ -65,6 +65,7 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter); // route middleware from ./routes/index.js
 app.use("/users", usersRouter); // route middleware from ./routes/users.js
+app.use("/posts", postsRouter);
 
 /**
  * Catch all route, if we get to here then the 
