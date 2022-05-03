@@ -1,31 +1,35 @@
 <div class="view">
     <div id="image">
-        <img src="../public/images/chonkybee.png" alt="Image not found. Sorry!">
+        <img src="/{{currentPost.photopath}}">
     </div>
     <div id="image">
         <div id="post-info">
-            <section id="image-title">
+            <div id="image-title">
                 <label>Image Title: </label>
-            </section>
-            <section id="image-author">
+                {{currentPost.title}}
+            </div>
+            <div id="image-author">
                 <label>Image Author: </label>
-            </section>
-            <section id="creation-time">
+                {{currentPost.username}}
+            </div>
+            <div id="creation-time">
                 <label>Image Creation Time: </label>
-            </section>
+                {{currentPost.created}}
+            </div>
             <br/>
-            <section id="description">
+            <div id="description">
                 <label>Description: </label>
-            </section>
+                {{currentPost.description}}
+            </div>
             <br/>
         </div>
     </div>
     <div id="image">
-        <section id="post-info">
+        <div id="post-info">
             <h2>Comments</h2>
             <div id="comment-section">
             </div>
-        </section>
+        </div>
         <input id="comment-text" name="comment-text" type="text" placeholder="Type a comment here!">
     </div>
     <br />
