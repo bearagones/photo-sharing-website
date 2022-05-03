@@ -33,14 +33,14 @@
     </div>
 </form>
 <script>
-    const _form = document.getElementById('image-post')
+    const _form = document.getElementById('post-image')
     _form.onsubmit = function (event) {
         event.preventDefault();
         let _body = new FormData(_form);
 
-        axios('posts/createPost', {
+        axios('/posts/createPost', {
             data: _body,
-            method: "POST"
+            method: "POST",
         })
         .then((data) => {
             console.log(data.data);
