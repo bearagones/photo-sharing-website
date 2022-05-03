@@ -21,8 +21,8 @@ router.get('/postimage', (req,res,next) => {
   res.render('postimage', {title: "Post an Image"});
 })
 
-router.get('/viewpost', (req,res,next) => {
-  res.render('viewpost', {title: "View a Post"});
+router.get('/post/:id(\\d+)', (req,res,next) => {
+  res.send({params:req.params.id});
 })
 
 module.exports = router;
