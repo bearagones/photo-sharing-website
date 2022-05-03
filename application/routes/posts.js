@@ -22,37 +22,27 @@ var uploader = multer({storage: storage});
 
 router.post('/createPost', uploader.single("selectImage"), (req, res, next) => {
     let fileUploaded = req.file.path;
-    let fileAsThumbnail = `thumbnail-${req.file.fileName}`;
+    let fileAsThumbnail = `thumbnail-${req.file.filename}`;
     let destinationOfThumbnail = req.file.destination + "/" + fileAsThumbnail;
     let title = req.body.title;
     let description = req.body.description;
     let fk_userId = req.session.userId;
 
     sharp(fileUploaded)
-        .resize(200)
-        .toFile(destinationOfThumbnail)
-        .then(() => {
-            let baseSQL = 'INSERT INTO posts (title, description, photopath, thumbnail, created, fk_userId) VALUE (?,?,?,?,now(),?);'
-            return db.execute(baseSQL,[title, description, fileUploaded, destinationOfThumbnail, fk_userId]);
-        })
-        .then(([results, fields]) => {
-            if (results && results.affectedRows) {
-                successPrint("New post was created!");
-                res.json({status: "OK", message: "Your post was created successfully!", "redirect": "/"});
-            } else {
-                res.json({status: "OK", message: "Your post was not created!", "redirect": "/postimage"});
-            }
-        })
-        .catch((err) => {
-            if (err instanceof PostError) {
-                errorPrint(err.getMessage());
-                req.flash('error', err.getMessage());
-                res.status(err.getStatus());
-                res.redirect(err.getRedirectURL());
-            } else {
-                next(err);
-            }
-        })
+    .resize(200)
+    .toFile(destinationOfThumbnail)
+    .then(() => {
+        let baseSQL = 'INSERT INTO posts (title, description, photopath, thumbnail, created, fk_userId) VALUE (?,?,?,?,now(),?);;';
+        return db.execute(baseSQL,[title, description, fileUploaded, destinationOfThumbnail, fk_userId]);
+    })
+    .then(([results, fields]) => {
+        if (results && results.affectedRows) {
+            res.json({status: "OK", message: "Post was created!", "redirect": "/"});
+        } else {
+            res.json({status: "OK", message: "Unable to create post!", "redirect": "/postimage"});
+        }
+    })
+    .catch((err) => {next(err)});
 });
 
 module.exports = router;
