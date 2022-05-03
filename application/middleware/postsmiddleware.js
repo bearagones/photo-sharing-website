@@ -2,7 +2,7 @@ var db = require("../config/database");
 const postMiddleware = {};
 
 postMiddleware.getRecentPosts = function(req, res, next) {
-    let baseSQL = 'SELECT id, title, description, thumbnail, created FROM posts ORDER BY created DESC LIMIT 8';
+    let baseSQL = 'SELECT id, title, description, thumbnail, created FROM posts ORDER BY created DESC LIMIT 10';
     db.execute(baseSQL, [])
     .then(([results, fields]) => {
         res.locals.results = results;
