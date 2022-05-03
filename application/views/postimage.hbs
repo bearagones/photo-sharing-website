@@ -32,21 +32,3 @@
         </fieldset>
     </div>
 </form>
-<script>
-    const _form = document.getElementById('post-image')
-    _form.onsubmit = function (event) {
-        event.preventDefault();
-        let _body = new FormData(_form);
-
-        axios('/posts/createPost', {
-            data: _body,
-            method: "POST",
-        })
-        .then((data) => {
-            console.log(data.data);
-            alert(data.data.message);
-            location.replace(data.data.redirect);
-        })
-        .catch(err => console.log(err));
-    }
-</script>
