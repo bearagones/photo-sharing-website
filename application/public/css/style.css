@@ -1,4 +1,5 @@
 * {
+    color: black;
     border: none;
     box-sizing: border-box;
     cursor: url(../images/bumblebea.png), default;
@@ -9,7 +10,6 @@ h1 {
     font-size: 25pt;
     text-align: center;
     text-transform: uppercase;
-    color: black;
 }
 
 h2 {
@@ -27,6 +27,7 @@ body {
     justify-content: center;
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
 }
 
 header {
@@ -49,6 +50,12 @@ button {
     padding: 12px 45px;
     letter-spacing: 1px;
     text-transform: uppercase;
+}
+
+#post-info label {
+    font-family: "Bodoni 72 Smallcaps", sans-serif;
+    color: lightslategrey;
+    font-size: 15pt;
 }
 
 input[type=text], input[type=password], input[type=email] {
@@ -99,7 +106,7 @@ a {
 }
 
 #post-info {
-    width: 600px;
+    width: 95%;
     font-size: 12pt;
     padding: 15px;
     height: auto;
@@ -162,10 +169,10 @@ img {
 }
 
 #home-container {
-    width: 100%;
+    width: 99%;
     height: 95vh;
     margin: auto;
-    overflow: auto;
+    overflow: scroll;
     align-items: center;
     justify-content: center;
     display: grid;
@@ -261,4 +268,10 @@ img {
 
 .alert-success {
     background-color: #deffe8;
+}
+
+.card {
+    background-color: aliceblue;
+    border: 2px solid white;
+    padding: 20px;
 }
