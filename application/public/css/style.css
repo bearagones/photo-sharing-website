@@ -27,7 +27,6 @@ body {
     justify-content: center;
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
-    overflow-x: hidden;
 }
 
 header {
@@ -268,6 +267,10 @@ img {
 
 .alert-success {
     background-color: #deffe8;
+}
+
+.alert-info {
+    background-color: #A7C7E7;
 }
 
 .card {
