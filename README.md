@@ -24,3 +24,4 @@ Please follow the instructions below and fill in the information requested when 
 ## Run Instructions
 1. In the terminal, type: "cd ./application"
 2. In the terminal, type: "npm start"
+3. Go to your browser, type "localhost:3000"
