@@ -6,6 +6,7 @@ var crypto = require('crypto');
 var PostModel = require('../models/postsmodel');
 const PostError = require('../helpers/error/PostError');
 const {successPrint, errorPrint} = require('../helpers/debug/debugprinters');
+const {postValidation} = require('../middleware/validation');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -19,7 +20,7 @@ var storage = multer.diskStorage({
 
 var uploader = multer({storage: storage});
 
-router.post('/createPost', uploader.single("selectImage"), (req, res, next) => {
+router.post('/createPost', uploader.single("selectImage"), postValidation, (req, res, next) => {
     let fileUploaded = req.file.path;
     let fileAsThumbnail = `thumbnail-${req.file.filename}`;
     let destinationOfThumbnail = req.file.destination + "/" + fileAsThumbnail;
@@ -43,7 +44,7 @@ router.post('/createPost', uploader.single("selectImage"), (req, res, next) => {
             }
         })
         .catch((err) => {
-            errorPrint("User could not be made", err);
+            errorPrint("Post could not be made", err);
             if (err instanceof PostError) {
                 errorPrint(err.getMessage());
                 res.status(err.getStatus());
