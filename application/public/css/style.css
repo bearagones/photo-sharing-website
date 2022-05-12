@@ -1,5 +1,4 @@
 * {
-    color: black;
     border: none;
     box-sizing: border-box;
     cursor: url(../images/bumblebea.png), default;
@@ -23,6 +22,10 @@ body {
     background: url(../images/blue-marble.jpeg);
     background-size: cover;
     height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+    overflow-x: hidden;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -77,6 +80,8 @@ span {
 
 a {
     text-decoration: none;
+    color: #92cba8;
+    font-weight: bold;
 }
 
 .login {
@@ -86,6 +91,7 @@ a {
     margin: auto;
     background: white;
     box-shadow: inset 0 0 0 10px #A7C7E7;
+    grid-column: 3;
 }
 
 .post, .register {
@@ -95,20 +101,23 @@ a {
     margin: 10px auto;
     background: white;
     box-shadow: inset 0 0 0 10px #A7C7E7;
+    grid-column: 3;
+    text-align: left;
 }
 
 #comment-section {
-    width: 500px;
     font-size: 15pt;
-    height: 165px;
+    height: 110px;
+    display: flex;
     overflow: scroll;
+    flex-flow: column-reverse nowrap;
 }
 
 #post-info {
-    width: 95%;
+    width: 600px;
     font-size: 12pt;
     padding: 15px;
-    height: auto;
+    height: 200px;
     margin: auto;
     background: white;
     box-shadow: inset 0 0 0 10px #A7C7E7;
@@ -190,7 +199,7 @@ img {
     font-size: 10pt;
     justify-content: center;
     grid-area: content;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr;
     grid-template-columns: repeat(5, 1fr);
     grid-auto-rows: 1fr;
     grid-auto-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -277,4 +286,40 @@ img {
     background-color: aliceblue;
     border: 2px solid white;
     padding: 20px;
+}
+
+div[id^=message-] {
+    display: grid;
+    grid-template-rows: .3fr 1fr;
+    grid-template-columns: 285px 285px;
+    font-size: .8rem;
+    border-top: 3px solid rgb(192,217,246);
+    grid-template-areas:
+    "author created"
+    "comment comment";
+}
+
+.author-text {
+    grid-area: author;
+    justify-self: start;
+    font-family: "Bodoni 72 Smallcaps", sans-serif;
+    font-size: 1rem;
+    color: #a9ccb5;
+}
+
+.comment {
+    grid-area: comment;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 45px;
+    min-height: 45px;
+}
+
+.date-posted {
+    grid-area: created;
+    justify-self: end;
+}
+
+#top {
+    height: 90px;
 }
