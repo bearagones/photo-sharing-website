@@ -34,7 +34,7 @@ PostModel.getPostById = (postId) => {
 
     return db.execute(baseSQL, [postId])
         .then(([results, fields]) => {
-            return Promise.resolve(results );
+            return Promise.resolve(results);
         })
         .catch(err => Promise.reject(err));
 }
