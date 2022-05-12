@@ -6,7 +6,7 @@ const {create} = require('../models/commentsmodel');
 router.post('/create', (req, res, next) => {
     if (!req.session.username) {
         errorPrint("Must be logged in to comment!");
-        req.json({
+        res.json({
             code: -1, status: "danger", message: "Must be logged in to create a comment!"
         })
     } else {
