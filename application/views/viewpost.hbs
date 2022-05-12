@@ -4,22 +4,24 @@
     </div>
     <div id="image">
         <div id="post-info">
-            <div id="image-title">
-                <label>Image Title: </label>
-                {{currentPost.title}}
-            </div>
-            <div id="image-author">
-                <label>Image Author: </label>
-                {{currentPost.username}}
-            </div>
-            <div id="creation-time">
-                <label>Image Creation Time: </label>
-                {{currentPost.created}}
-            </div>
-            <br/>
-            <div id="description">
-                <label>Description: </label>
-                {{currentPost.description}}
+            <div id="top">
+                <div id="image-title">
+                    <label>Image Title: </label>
+                    {{currentPost.title}}
+                </div>
+                <div id="image-author">
+                    <label>Image Author: </label>
+                    {{currentPost.username}}
+                </div>
+                <div id="creation-time">
+                    <label>Image Creation Time: </label>
+                    {{currentPost.created}}
+                </div>
+                <br/>
+                <div id="description">
+                    <label>Description: </label>
+                    {{currentPost.description}}
+                </div>
             </div>
             <br/>
         </div>
@@ -28,10 +30,24 @@
         <div id="post-info">
             <h2>Comments</h2>
             <div id="comment-section">
+                {{#each currentPost.comments}}
+                    {{> comment this}}
+                {{/each}}
             </div>
         </div>
-        <input id="comment-text" name="comment-text" type="text" placeholder="Type a comment here!">
+        <div id="comment-box">
+            <input id="comment-text" name="comment-text" type="text" placeholder="Type a comment here!">
+            <i id="comment-button" name="comment-button"></i>
+        </div>
     </div>
-    <br />
-    <br />
+    <br/>
+    <br/>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('span[class=date-posted]').forEach((postedDate) => {
+            postedDate.textContent = new Date(postedDate.textContent).toLocaleString();
+        });
+    });
+</script>
