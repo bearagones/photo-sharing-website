@@ -3,18 +3,17 @@ var router = express.Router();
 const UserModel = require('../models/usersmodel');
 const UserError = require('../helpers/error/UserError');
 const {errorPrint, successPrint} = require('../helpers/debug/debugprinters');
-const {registerValidation} = require('../middleware/validation');
+const {registerValidation, loginValidation, postValidation} = require('../middleware/validation');
 
 router.post('/register', registerValidation, (req, res, next) => {
     let username = req.body.username;
     let email = req.body.email;
     let password = req.body.password;
-    let confirmpass = req.body.password;
 
     UserModel.usernameExists(username)
         .then((usernameDoesExist) => {
             if (usernameDoesExist) {
-                throw new UserError("Registration Failed: Email already exists", "/registration", 200);
+                throw new UserError("Registration Failed: Username already exists", "/registration", 200);
             } else {
                 return UserModel.emailExists(email);
             }
@@ -47,15 +46,13 @@ router.post('/register', registerValidation, (req, res, next) => {
         });
 });
 
-router.post('/login', (req, res, next) => {
+router.post('/login', loginValidation, (req, res, next) => {
     let username = req.body.username;
     let password = req.body.password;
 
-    //do server side validation here
-
     UserModel.authenticate(username, password)
         .then((loggedUserId) => {
-            if (loggedUserId) {
+            if (loggedUserId > 0) {
                 successPrint(`User ${username} is logged in`);
                 req.session.username = username;
                 req.session.userId = loggedUserId;
