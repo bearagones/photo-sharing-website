@@ -19,7 +19,8 @@ Please follow the instructions below and fill in the information requested when 
 # Build/Run Instructions
 
 ## Build Instructions
-1. In the terminal, type: "npm install"
+1. In the terminal, type: "cd ./application"
+2. In the terminal, type: "npm install"
 
 ## Run Instructions
 1. In the terminal, type: "cd ./application"
