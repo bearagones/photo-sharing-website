@@ -1,20 +1,8 @@
-# CSC 317 Term Project
+# Photo Sharing Website
 
-## Purpose
+## Description
 
-The purpose of this repository is to store all the code for your web application. This also includes the history of all commits made and who made them. Only code submitted on the master branch will be graded.
-
-Please follow the instructions below and fill in the information requested when prompted.
-
-## Student Information
-
-|               | Information   |
-|:-------------:|:-------------:|
-| Student Name  | Beatrice Aragones     |
-| Student ID    | 920614978     |
-| Student Email | baragones@mail.sfsu.edu    |
-
-
+This is a photo sharing website where users can create an account, log in and sign out, post images, and comment on other users' images. 
 
 # Build/Run Instructions
 
