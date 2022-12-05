@@ -1,9 +1,5 @@
 # Photo Sharing Website
 
-## Description
-
-This is a photo sharing website where users can create an account, log in and sign out, post images, and comment on other users' images. 
-
 # Build/Run Instructions
 
 ## Build Instructions
